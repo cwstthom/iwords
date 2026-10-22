@@ -12,8 +12,8 @@ class InterfaceSettingsViewController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        preferredContentSize = view.fittingSize.then {
-            $0.width = SETTINGS_WINDOW_WIDTH
-        }
+        var fittingSize = view.fittingSize
+        fittingSize.width = SETTINGS_WINDOW_WIDTH
+        preferredContentSize = fittingSize
     }
 }

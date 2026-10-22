@@ -57,25 +57,27 @@ class SearchBarViewController: NSTitlebarAccessoryViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         searchField.delegate = self
-
+        
         startListeningToUserDefaults()
-
+        
         setAutogrows(UserDefaults.standard.bool(forKey: "searchBarGrowsToFitContent"))
-
-        view.menu = NSMenu().then {
-            $0.addItem(NSMenuItem(title: "Search Bar Grows Vertically",
+        
+        view.menu = {
+            let menu = NSMenu()
+            let item = NSMenuItem(title: "Search Bar Grows Vertically",
                                   action: nil,
-                                  keyEquivalent: "").then {
-                $0.bind(.value,
-                        to: NSUserDefaultsController.shared,
-                        withKeyPath: "values.searchBarGrowsToFitContent",
-                        options: [:])
-            })
-        }
+                                  keyEquivalent: "")
+            item.bind(.value,
+                      to: NSUserDefaultsController.shared,
+                      withKeyPath: "values.searchBarGrowsToFitContent",
+                      options: [:]
+            )
+            menu.addItem(item)
+            return menu
+        }()
     }
-
     override func viewDidLayout() {
         super.viewDidLayout()
         self.searchField.invalidateSize()

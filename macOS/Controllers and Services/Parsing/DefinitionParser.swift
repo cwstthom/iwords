@@ -9,7 +9,7 @@
 
 import Foundation
 import Parsing
-import DWUtils
+//import DWUtils
 
 // NOTE: this parser is currently unused. Instead, the parser in `DictionaryParser` (simpler, based
 // on Pearse codes output by WORDS) is used instead.
@@ -1000,12 +1000,16 @@ struct Padded<Input>: Parser where Input: Collection,
 let variety = Parsing.Prefix<Substring>(1).map(String.init(_:)).compactMap(Int.init(_:))
 
 func getNotes(_ str: Substring) -> [String] {
-    str
-        .nonEmptyString(afterTrimmingCharactersIn: .whitespacesAndNewlines)?
+    let trimmed = String(str).trimmingCharacters(in: .whitespacesAndNewlines)
+    guard !trimmed.isEmpty else {
+        return []
+    }
+
+    return trimmed
         .components(separatedBy: "  ")
-        .compactMap { $0.nonEmptyString(afterTrimmingCharactersIn: .whitespacesAndNewlines) }
+        .map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
+        .filter { !$0.isEmpty }
         .map(prettifyNote)
-    ?? []
 }
 
 func prettifyNote(_ note: String) -> String {

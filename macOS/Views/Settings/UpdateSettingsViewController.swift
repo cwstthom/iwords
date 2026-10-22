@@ -12,9 +12,11 @@ class UpdateSettingsViewController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        preferredContentSize = view.fittingSize.then {
-            $0.width = SETTINGS_WINDOW_WIDTH
-        }
+        preferredContentSize = {
+            var size = view.fittingSize
+            size.width = SETTINGS_WINDOW_WIDTH
+            return size
+        }()
     }
     
 }

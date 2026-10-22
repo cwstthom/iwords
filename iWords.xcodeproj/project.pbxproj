@@ -25,7 +25,6 @@
 		3760B38227B0992500F81F38 /* UpdateSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3760B38027B0992500F81F38 /* UpdateSettingsViewController.swift */; };
 		3760B38627B169C700F81F38 /* Sparkle in Frameworks */ = {isa = PBXBuildFile; productRef = 3760B38527B169C700F81F38 /* Sparkle */; };
 		3760B38C27B1E7DD00F81F38 /* DictionaryParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3760B38B27B1E7DD00F81F38 /* DictionaryParser.swift */; };
-		3766E410277A3CC700A9D064 /* DWUtils in Frameworks */ = {isa = PBXBuildFile; productRef = 3766E40F277A3CC700A9D064 /* DWUtils */; };
 		37679DFC262C779E003D15E1 /* HistoryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37679DFB262C779E003D15E1 /* HistoryController.swift */; };
 		37679DFE262C860B003D15E1 /* BackForwardController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37679DFD262C860B003D15E1 /* BackForwardController.swift */; };
 		37679E00262CC87C003D15E1 /* WindowRestoration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37679DFF262CC87C003D15E1 /* WindowRestoration.swift */; };
@@ -170,7 +169,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				3760B38627B169C700F81F38 /* Sparkle in Frameworks */,
-				3766E410277A3CC700A9D064 /* DWUtils in Frameworks */,
 				37126CF2278A0030009BB010 /* OrderedCollections in Frameworks */,
 				37CC43662634AB8100E60CE9 /* Parsing in Frameworks */,
 				373AECBD272E22CB0021A393 /* Difference in Frameworks */,
@@ -430,7 +428,6 @@
 			packageProductDependencies = (
 				37CC43652634AB8100E60CE9 /* Parsing */,
 				373AECBC272E22CB0021A393 /* Difference */,
-				3766E40F277A3CC700A9D064 /* DWUtils */,
 				37126CF1278A0030009BB010 /* OrderedCollections */,
 				3760B38527B169C700F81F38 /* Sparkle */,
 			);
@@ -462,8 +459,9 @@
 		37A4D1A1262227E300A9E9EC /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				BuildIndependentTargetsInParallel = YES;
 				LastSwiftUpdateCheck = 1250;
-				LastUpgradeCheck = 1320;
+				LastUpgradeCheck = 2700;
 				TargetAttributes = {
 					37A4D1AC262227E400A9E9EC = {
 						CreatedOnToolsVersion = 12.5;
@@ -493,6 +491,7 @@
 				373AECBB272E22CA0021A393 /* XCRemoteSwiftPackageReference "Difference" */,
 				37126CF0278A0030009BB010 /* XCRemoteSwiftPackageReference "swift-collections" */,
 				3760B38427B169C600F81F38 /* XCRemoteSwiftPackageReference "Sparkle" */,
+				02666BDE3069CA3A00D33950 /* XCRemoteSwiftPackageReference "Then" */,
 			);
 			productRefGroup = 37A4D1AE262227E400A9E9EC /* Products */;
 			projectDirPath = "";
@@ -589,7 +588,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "mkdir \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/Contents/MacOS\" \nmv \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/Contents/Resources/words\" \\\n \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/Contents/MacOS/words\"\n";
+			shellScript = "mkdir -p \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/Contents/MacOS\"\ncp -f \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/Contents/Resources/words\" \\\n \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/Contents/MacOS/words\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -670,6 +669,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -701,9 +701,11 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 0.4.4;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -723,6 +725,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "";
 				PRODUCT_NAME = iWords;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -732,6 +735,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -763,9 +767,11 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 0.4.4;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				EXCLUDED_ARCHS = arm64;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -779,6 +785,7 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = org.iwords.iwords;
 				PRODUCT_NAME = iWords;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 			};
@@ -791,10 +798,10 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 5TSNJUMDQY;
+				DEVELOPMENT_TEAM = 48MP7FFBC9;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = iOS/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = "$(RECOMMENDED_IPHONEOS_DEPLOYMENT_TARGET)";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -817,10 +824,10 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 5TSNJUMDQY;
+				DEVELOPMENT_TEAM = 48MP7FFBC9;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = iOS/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = "$(RECOMMENDED_IPHONEOS_DEPLOYMENT_TARGET)";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -845,8 +852,9 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 0.7.2;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "macOS/Supporting\\ files/PreviewAssets.xcassets";
-				DEVELOPMENT_TEAM = 5TSNJUMDQY;
+				DEVELOPMENT_TEAM = 48MP7FFBC9;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -854,11 +862,12 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = "macOS/Supporting files/Info.plist";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.reference";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MACOSX_DEPLOYMENT_TARGET = 27.0;
 				MARKETING_VERSION = 0.7.2;
 				OTHER_CODE_SIGN_FLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = org.iwords.iwords;
@@ -877,8 +886,9 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 0.7.2;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "macOS/Supporting\\ files/PreviewAssets.xcassets";
-				DEVELOPMENT_TEAM = 5TSNJUMDQY;
+				DEVELOPMENT_TEAM = 48MP7FFBC9;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -886,11 +896,12 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = "macOS/Supporting files/Info.plist";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.reference";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MACOSX_DEPLOYMENT_TARGET = 27.0;
 				MARKETING_VERSION = 0.7.2;
 				OTHER_CODE_SIGN_FLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = org.iwords.iwords;
@@ -906,6 +917,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = 5TSNJUMDQY;
 				INFOPLIST_FILE = iWordsTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -913,7 +925,7 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 11.2;
+				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
 				PRODUCT_BUNDLE_IDENTIFIER = org.danielweiner.iWordsTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
@@ -928,6 +940,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = 5TSNJUMDQY;
 				INFOPLIST_FILE = iWordsTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -935,7 +948,7 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 11.2;
+				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
 				PRODUCT_BUNDLE_IDENTIFIER = org.danielweiner.iWordsTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
@@ -986,6 +999,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		02666BDE3069CA3A00D33950 /* XCRemoteSwiftPackageReference "Then" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/devxoul/Then";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.0;
+			};
+		};
 		37126CF0278A0030009BB010 /* XCRemoteSwiftPackageReference "swift-collections" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/apple/swift-collections.git";
@@ -1035,10 +1056,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 3760B38427B169C600F81F38 /* XCRemoteSwiftPackageReference "Sparkle" */;
 			productName = Sparkle;
-		};
-		3766E40F277A3CC700A9D064 /* DWUtils */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = DWUtils;
 		};
 		37CC43652634AB8100E60CE9 /* Parsing */ = {
 			isa = XCSwiftPackageProductDependency;

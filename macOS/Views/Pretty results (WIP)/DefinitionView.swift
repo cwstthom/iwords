@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import DWUtils
+//import DWUtils
 
 #if DEBUG
 
@@ -28,8 +28,7 @@ struct DefinitionsView: View {
                         DefinitionView(definition: definition)
                     case .text(let text):
                         Text(verbatim: text)
-                            .safeSelectable()
-                            .font(.system(size: 16,
+                            .safeAreaPadding()                            .font(.system(size: 16,
                                           weight: .regular,
                                           design: .serif))
                             .padding(.leading, 16)
@@ -108,42 +107,42 @@ struct DefinitionView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
 
-            if !definition.possibilities.isEmpty {
-                VStack(alignment: .leading) {
-                    ForEach(definition.possibilities, id: \.debugDescription) { possibility in
-                        SafeSelectableText {
-                            Text(possibility.word)
-                                .foregroundColor(Color.primary)
-                                .font(.system(size: 16, weight: .regular, design: .serif))
-                            + Text("  ")
-                            + Text(verbatim: possibility.description)
-                                .foregroundColor(.secondary)
-                                .font(.system(size: 16, weight: .regular, design: .serif))
-                        }
-                    }
-                    .multilineTextAlignment(.leading)
-                }.padding(.top, 16)
-
-                Divider()
-            }
+//            if !definition.possibilities.isEmpty {
+//                VStack(alignment: .leading) {
+//                    ForEach(definition.possibilities, id: \.debugDescription) { possibility in
+//                        SafeAreaRegions {
+//                            Text(possibility.word)
+//                                .foregroundColor(Color.primary)
+//                                .font(.system(size: 16, weight: .regular, design: .serif))
+//                            + Text("  ")
+//                            + Text(verbatim: possibility.description)
+//                                .foregroundColor(.secondary)
+//                                .font(.system(size: 16, weight: .regular, design: .serif))
+//                        }
+//                    }
+//                    .multilineTextAlignment(.leading)
+//                }.padding(.top, 16)
+//
+//                Divider()
+//           }
 
             ForEach(definition.words, id: \.meaning) { word in
                 VStack(alignment: .leading, spacing: 4) {
-                    if let expansion = word.expansion {
-                        HStack(alignment: .firstTextBaseline) {
-                            SafeSelectableText {
-                                Text(verbatim: expansion.principleParts ?? "")
-                                    .font(.system(size: 16, weight: .bold, design: .serif))
-                                + Text("  ") + Text(verbatim: expansionDescription(expansion))
-                                    .foregroundColor(.secondary)
-                                    .font(.system(size: 16, weight: .regular, design: .serif))
-                            }
-                        }
-                        .padding(.leading, 16)
-                    }
+//                    if let expansion = word.expansion {
+//                        HStack(alignment: .firstTextBaseline) {
+//                            SafeSelectableText {
+//                                Text(verbatim: expansion.principleParts ?? "")
+//                                    .font(.system(size: 16, weight: .bold, design: .serif))
+//                                + Text("  ") + Text(verbatim: expansionDescription(expansion))
+//                                    .foregroundColor(.secondary)
+//                                    .font(.system(size: 16, weight: .regular, design: .serif))
+//                            }
+//                        }
+//                        .padding(.leading, 16)
+//                    }
 
                     Text(verbatim: word.meaning)
-                        .safeSelectable()
+//                        .safeSelectable()
                         .font(.system(size: 16, weight: .regular, design: .serif))
                         .padding(.leading, 32)
                 }

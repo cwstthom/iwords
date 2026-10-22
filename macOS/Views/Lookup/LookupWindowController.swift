@@ -7,7 +7,7 @@
 
 import Cocoa
 import SwiftUI
-import Flow
+//import Flow
 
 extension NSUserInterfaceItemIdentifier {
     static let backMenuItem = NSUserInterfaceItemIdentifier("back")
@@ -64,7 +64,7 @@ class LookupWindowController: NSWindowController {
     private var dirObservation: Any?
 
     private lazy var directionMenuFormRepresentation: NSMenu = {
-        NSMenu().then { menu in
+        let menu = NSMenu()
             Dictionary.Direction.allCases
                 .map {
                     let item = NSMenuItem(title: $0.description, action: #selector(setDirection(_:)), keyEquivalent: "")
@@ -74,7 +74,7 @@ class LookupWindowController: NSWindowController {
                 .forEach {
                     menu.addItem($0)
                 }
-        }
+        return menu
     }()
 
     override func windowDidLoad() {
@@ -87,19 +87,24 @@ class LookupWindowController: NSWindowController {
         backForwardMenuItem.submenu = backForwardController.menu()
         backForwardToolbarItem.menuFormRepresentation = backForwardMenuItem
 
-        directionToggleItem?.menuFormRepresentation = NSMenuItem(title: "Direction", action: nil, keyEquivalent: "")
-            .then {
-                $0.submenu = directionMenuFormRepresentation
-            }
+        directionToggleItem?.menuFormRepresentation = {
+            let item = NSMenuItem(title: "Direction", action: nil, keyEquivalent: "")
+            item.submenu = directionMenuFormRepresentation
+            return item
+            }()
 
         fontSizeItem.menuFormRepresentation = fontMenuFormRepresentation()
 
-        floatToolbarItem.menuFormRepresentation = NSMenuItem(title: "Float on Top",
-                                                             action: nil,
-                                                             keyEquivalent: "").then {
-            $0.target = self
-            $0.action = #selector(toggleFloats(_:))
-        }
+        floatToolbarItem.menuFormRepresentation = {
+            let item = NSMenuItem(
+                title: "Float on Top",
+                action: nil,
+                keyEquivalent: ""
+            )
+            item.target = self
+            item.action = #selector(toggleFloats(_:))
+            return item
+        }()
 
         // The window is restorable, so this will only affect initial launch after installation.
         window?.setContentSize(NSSize(width: 700, height: 500))
@@ -231,20 +236,33 @@ class LookupWindowController: NSWindowController {
     }
 
     private func fontMenuFormRepresentation() -> NSMenuItem {
-        NSMenuItem(title: "Font Size", action: nil, keyEquivalent: "").then {
-            $0.submenu = NSMenu().then { m in
-                m.addItem(NSMenuItem(title: "Decrease Text Size",
-                                     action: #selector(decreaseTextSize),
-                                     keyEquivalent: "").then {
-                    $0.target = self
-                })
-                m.addItem(NSMenuItem(title: "Increase Text Size",
-                                     action: #selector(increaseTextSize),
-                                     keyEquivalent: "").then {
-                    $0.target = self
-                })
-            }
-        }
+        let menuItem = NSMenuItem(
+            title: "Font Size",
+            action: nil,
+            keyEquivalent: ""
+        )
+
+        let submenu = NSMenu()
+
+        let decreaseItem = NSMenuItem(
+            title: "Decrease Text Size",
+            action: #selector(decreaseTextSize),
+            keyEquivalent: ""
+        )
+        decreaseItem.target = self
+        submenu.addItem(decreaseItem)
+
+        let increaseItem = NSMenuItem(
+            title: "Increase Text Size",
+            action: #selector(increaseTextSize),
+            keyEquivalent: ""
+        )
+        increaseItem.target = self
+        submenu.addItem(increaseItem)
+
+        menuItem.submenu = submenu
+
+        return menuItem
     }
 
     // The core of the logic for actually performing a query and updating the UI.
@@ -319,7 +337,7 @@ class LookupWindowController: NSWindowController {
             } else { return nil }
         }()
 
-        let isAlternateNavigation = NSApp.currentEventModifierFlags.contains(.shift)
+        guard let isAlternateNavigation = NSApp.currentEvent?.modifierFlags.contains(.shift) else { return  }
 
         guard let searchText = searchText,
               let sanitized = Dictionary.sanitize(input: searchText) else {
@@ -337,12 +355,17 @@ class LookupWindowController: NSWindowController {
             backForwardController?.updateSegmentedControl()
             lookupViewController?.isLoading = isLoading
             searchBar?.isLoading = isLoading
-            window?.tab.accessoryView = isLoading ? NSProgressIndicator().then {
-                $0.controlSize = .small
-                $0.isIndeterminate = true
-                $0.style = .spinning
-                $0.startAnimation(self)
-            } : nil
+
+            let accessoryView: NSView? = isLoading ? {
+                let indicator = NSProgressIndicator()
+                indicator.controlSize = .small
+                indicator.isIndeterminate = true
+                indicator.style = .spinning
+                indicator.startAnimation(self)
+                return indicator
+            }() : nil
+
+            window?.tab.accessoryView = accessoryView
         }
     }
 

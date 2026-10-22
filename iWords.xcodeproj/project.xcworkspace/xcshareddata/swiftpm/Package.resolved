@@ -1,70 +1,69 @@
 {
-  "object": {
-    "pins": [
-      {
-        "package": "Difference",
-        "repositoryURL": "https://github.com/krzysztofzablocki/Difference.git",
-        "state": {
-          "branch": null,
-          "revision": "e8d023826efc3aef58cf21cc2f6483ad3a067f5b",
-          "version": "1.0.0"
-        }
-      },
-      {
-        "package": "Flow",
-        "repositoryURL": "https://github.com/alexito4/Flow.git",
-        "state": {
-          "branch": null,
-          "revision": "af6ef9e25ea9b1734743fa26e14fd4589a92633a",
-          "version": "1.0.0"
-        }
-      },
-      {
-        "package": "Sparkle",
-        "repositoryURL": "https://github.com/sparkle-project/Sparkle",
-        "state": {
-          "branch": null,
-          "revision": "85d3fa2e0e2b7871866eb1a92231847cff4162fd",
-          "version": "2.0.0"
-        }
-      },
-      {
-        "package": "swift-argument-parser",
-        "repositoryURL": "https://github.com/apple/swift-argument-parser",
-        "state": {
-          "branch": null,
-          "revision": "47bd06ebeff8146ecd0020809e186218b46f465f",
-          "version": "0.4.2"
-        }
-      },
-      {
-        "package": "Benchmark",
-        "repositoryURL": "https://github.com/google/swift-benchmark",
-        "state": {
-          "branch": null,
-          "revision": "8e0ef8bb7482ab97dcd2cd1d6855bd38921c345d",
-          "version": "0.1.0"
-        }
-      },
-      {
-        "package": "swift-collections",
-        "repositoryURL": "https://github.com/apple/swift-collections.git",
-        "state": {
-          "branch": null,
-          "revision": "9d8719c8bebdc79740b6969c912ac706eb721d7a",
-          "version": "0.0.7"
-        }
-      },
-      {
-        "package": "swift-parsing",
-        "repositoryURL": "https://github.com/pointfreeco/swift-parsing",
-        "state": {
-          "branch": null,
-          "revision": "346fbdcb793c4baa845ca44664ed20f719a7d83b",
-          "version": "0.1.2"
-        }
+  "originHash" : "86ffa5df4e49f9655c02c8a05865087192dadd8d2899841efe6d7b9b29ee2175",
+  "pins" : [
+    {
+      "identity" : "difference",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/krzysztofzablocki/Difference.git",
+      "state" : {
+        "revision" : "e8d023826efc3aef58cf21cc2f6483ad3a067f5b",
+        "version" : "1.0.0"
       }
-    ]
-  },
-  "version": 1
+    },
+    {
+      "identity" : "sparkle",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/sparkle-project/Sparkle",
+      "state" : {
+        "revision" : "85d3fa2e0e2b7871866eb1a92231847cff4162fd",
+        "version" : "2.0.0"
+      }
+    },
+    {
+      "identity" : "swift-argument-parser",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apple/swift-argument-parser",
+      "state" : {
+        "revision" : "47bd06ebeff8146ecd0020809e186218b46f465f",
+        "version" : "0.4.2"
+      }
+    },
+    {
+      "identity" : "swift-benchmark",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/google/swift-benchmark",
+      "state" : {
+        "revision" : "8e0ef8bb7482ab97dcd2cd1d6855bd38921c345d",
+        "version" : "0.1.0"
+      }
+    },
+    {
+      "identity" : "swift-collections",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apple/swift-collections.git",
+      "state" : {
+        "revision" : "9d8719c8bebdc79740b6969c912ac706eb721d7a",
+        "version" : "0.0.7"
+      }
+    },
+    {
+      "identity" : "swift-parsing",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/pointfreeco/swift-parsing",
+      "state" : {
+        "revision" : "346fbdcb793c4baa845ca44664ed20f719a7d83b",
+        "version" : "0.1.2"
+      }
+    },
+    {
+      "identity" : "then",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/devxoul/Then",
+      "state" : {
+        "revision" : "d41ef523faef0f911369f79c0b96815d9dbb6d7a",
+        "version" : "3.0.0"
+      }
+    }
+  ],
+  "version" : 3
 }

@@ -7,8 +7,8 @@
 
 import Cocoa
 import Intents
-import DWUtils
-import Flow
+//import DWUtils
+//import Flow
 import Sparkle
 
 extension NSFont {
@@ -56,7 +56,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     }
 
     func applicationDidFinishLaunching(_ notification: Notification) {
-        DebugDefaults.check()
+        // DebugDefaults.check()
 
         setUpFont()
 
@@ -126,19 +126,15 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     }
 
     func saveFont(_ font: NSFont) {
-        NSKeyedArchiver(requiringSecureCoding: true)
-            .then {
-                $0.encode(font, forKey: "font")
-            }
-            .encodedData
-            .do {
-                UserDefaults.standard.set($0, forKey: "font")
-            }
+        let archiver = NSKeyedArchiver(requiringSecureCoding: true)
+        archiver.encode(font, forKey: "font")
+        let data = archiver.encodedData
+        UserDefaults.standard.set(data, forKey: "font")
     }
 
     @IBAction @objc
     func resetFont(_ sender: Any?) {
-        font = font.dwWithSize(16)
+        font = font.withSize(16)
         NSFontManager.shared.setSelectedFont(font, isMultiple: false)
         applyFont(font)
         saveFont(font)
@@ -199,7 +195,10 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
 
     func showNewWindow(_ newWindow: NSWindow) {
         if let keyWindow = NSApp.keyWindow {
-            let newPoint = newWindow.cascadeTopLeft(from: keyWindow.topLeft)
+            let frame = keyWindow.frame
+            let topLeft = NSPoint(x: frame.minX, y: frame.maxY)
+
+            let newPoint = newWindow.cascadeTopLeft(from: topLeft)
             newWindow.setFrameTopLeftPoint(newPoint)
         } else {
             newWindow.center()

@@ -6,7 +6,6 @@
 //
 
 import Cocoa
-import SwiftUI
 import WebKit
 
 enum ResultDisplayMode: Int {

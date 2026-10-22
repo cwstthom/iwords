@@ -10,17 +10,27 @@ import AppKit
 @objc
 class ServiceProvider: NSObject {
     func lookUp(_ text: String, direction: Dictionary.Direction) {
-        let frontmostWindow = NSApp.orderedWindows.first ?? {
+        let frontmostWindow: NSWindow
+
+        if let window = NSApp.orderedWindows.first {
+            frontmostWindow = window
+        } else {
             let newWindow = LookupWindowController.newController().window!
 
             if let keyWindow = NSApp.keyWindow {
-                let newPoint = newWindow.cascadeTopLeft(from: keyWindow.topLeft)
+                let topLeft = NSPoint(
+                    x: keyWindow.frame.minX,
+                    y: keyWindow.frame.maxY
+                )
+
+                let newPoint = newWindow.cascadeTopLeft(from: topLeft)
                 newWindow.setFrameTopLeftPoint(newPoint)
             } else {
                 newWindow.center()
             }
-            return newWindow
-        }()
+
+            frontmostWindow = newWindow
+        }
 
         NSApp.activate(ignoringOtherApps: true)
 
