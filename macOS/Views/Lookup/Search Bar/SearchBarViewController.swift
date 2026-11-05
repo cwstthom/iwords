@@ -120,8 +120,8 @@ class SearchBarViewController: NSTitlebarAccessoryViewController {
     }
 
     private func setHeight(_ height: CGFloat) {
-        view.frame.size.height = height
-        fullScreenMinHeight = height
+        let clampedHeight = min(max(height, 24), 142)
+        fullScreenMinHeight = clampedHeight
     }
 
     private func refreshHeight() {
